@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.gpstable.mapper.UserMapper">
+
+	<insert id="insert" parameterType="org.gpstable.domain.User" >
+		insert into users (id,name) values(#{id},#{name});
+	</insert>
+	
+	<select id="query" parameterType="long" resultType="org.gpstable.domain.User">
+		select * from users where id=#{id};
+	</select>
+	<update id="delete" parameterType="long">
+		delete from users where id=#{id};
+	</update>
+	<update id="update" parameterType="long">
+		update users set name='bb' where id=#{id};
+	</update>
+
+	<select id="deviceSelect" resultType="java.lang.String">
+		SELECT device_num FROM deviceinfo limit 100;
+	</select>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.gpstable.mapper.DeviceMapper">
+
+	<resultMap id="deviceEntity" type="org.gpstable.domain.Device" autoMapping="true">
+		<id property="id" column="id" javaType="Long"/>
+		<result property="deviceNum" column="device_num" javaType="String"/>
+		<result property="sensorData" column="sensor_data" javaType="Object"  jdbcType="OTHER" typeHandler="JSONTypeHandler"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="org.gpstable.domain.Device" >
+		insert into device (id,device_num) values(nextval('device_share_seq'),#{deviceNum});
+	</insert>
+
+	<insert id="insert2" parameterType="org.gpstable.domain.Device" >
+		insert into device (id,device_num,sensor_data) values(nextval('device_share_seq'),#{deviceNum},#{sensorData,javaType=Object,jdbcType=OTHER, typeHandler=JSONTypeHandler});
+	</insert>
+	
+	
+	<select id="query" parameterType="long" resultType="org.gpstable.domain.Device">
+		select * from device where id=#{id};
+	</select>
+	
+	<select id="queryByName" parameterType="string" resultType="org.gpstable.domain.Device">
+		select * from device where device_num=#{deviceNum};
+	</select>
+	
+	<select id="queryByNames" parameterType="org.gpstable.domain.Device" resultType="org.gpstable.domain.Device">
+		select * from device where device_num=#{deviceNum};
+	</select>
+	
+	<update id="delete" parameterType="long">
+		delete from device where id=#{id};
+	</update>
+	<update id="update" parameterType="long">
+		update device set device_num='bb' where id=#{id};
+	</update>
+
+	<select id="queryOneById"  resultMap="deviceEntity">
+		SELECT dc.* FROM device dc left join deviceinfo de on de.device_num=dc.device_num WHERE dc.id=#{id} AND dc.device_num=#{deviceNum};
+	</select>
+
+</mapper>

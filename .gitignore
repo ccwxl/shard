@@ -1,0 +1,10 @@
+/target/
+.idea/
+*.log
+.settings/
+.project
+.classpath
+*.iml
+*.out
+*.DS_Store
+catalina*/
