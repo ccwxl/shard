@@ -8,6 +8,7 @@ import net.sf.jsqlparser.statement.insert.Insert;
  * @create 2017-03-22 上午9:28
  * @email xielong.wang@nvr-china.com
  */
+@Deprecated
 public class InsertSqlConverter extends AbstractSqlConverter {
     public InsertSqlConverter() {
     }

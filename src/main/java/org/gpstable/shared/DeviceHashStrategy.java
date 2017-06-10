@@ -36,7 +36,7 @@ public class DeviceHashStrategy  implements Strategy{
 
 		int last= sharedKeyValue.hashCode()%5;
 
-		return String.valueOf(last);
+		return String.valueOf(Math.abs(last));
 	}
 
 

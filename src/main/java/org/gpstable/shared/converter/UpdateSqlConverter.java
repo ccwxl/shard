@@ -8,6 +8,7 @@ import net.sf.jsqlparser.statement.update.Update;
  * @create 2017-03-22 上午9:30
  * @email xielong.wang@nvr-china.com
  */
+@Deprecated
 public class UpdateSqlConverter extends AbstractSqlConverter {
     public UpdateSqlConverter() {}
 

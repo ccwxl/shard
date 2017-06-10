@@ -8,6 +8,7 @@ import net.sf.jsqlparser.statement.delete.Delete;
  * @create 2017-03-22 上午9:27
  * @email xielong.wang@nvr-china.com
  */
+@Deprecated
 public class DeleteSqlConverter extends AbstractSqlConverter {
 
     public DeleteSqlConverter() {

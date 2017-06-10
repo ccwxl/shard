@@ -1,7 +1,9 @@
 package org.gpstable.shared.plugin;
 
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -29,6 +31,9 @@ import org.gpstable.shared.TableSplit;
 import org.gpstable.shared.converter.SqlConverterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.alibaba.druid.sql.SQLUtils;
+import com.alibaba.druid.util.JdbcConstants;
 
 /**
  * @author xielong.wang
@@ -90,13 +95,17 @@ public class StrategyInterceptor implements Interceptor {
             //获取分表策略来处理分表
             StrategyManager strategyManager = ContextHelper.getStrategyManager();
             Strategy strategy = strategyManager.getStrategy(tableSplit.strategy());
-            //原表
+            //原表名
             String baseTableName = tableSplit.value();
-            //分表处理
+            //分表后的表名
             String convertTableName = strategy.convert2(tableSplit.value(), value);
             //根据原 sql 和生成的表名生成一个 sql
-            SqlConverterFactory sqlConverterFactory =SqlConverterFactory.getInstance();
-            String convertedSql =sqlConverterFactory.convert(originalSql,baseTableName,convertTableName);//sql
+            //SqlConverterFactory sqlConverterFactory =SqlConverterFactory.getInstance();
+            //String convertedSql =sqlConverterFactory.convert(originalSql,baseTableName,convertTableName);//sql
+            Map<String, String> mapping = Collections.singletonMap(baseTableName, convertTableName);
+            //使用druid 转换表名
+            String convertedSql=SQLUtils.refactor(originalSql,JdbcConstants.POSTGRESQL,mapping);
+            //替换sql
             metaStatementHandler.setValue("delegate.boundSql.sql", convertedSql);
             logger.info("分表后sql==[{}]", convertedSql);
         }

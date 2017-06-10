@@ -7,6 +7,7 @@ import net.sf.jsqlparser.statement.Statement;
  * @create 2017-03-22 上午9:22
  * @email xielong.wang@nvr-china.com
  */
+@Deprecated
 public abstract class AbstractSqlConverter implements SqlConverter {
     public AbstractSqlConverter() {
     }

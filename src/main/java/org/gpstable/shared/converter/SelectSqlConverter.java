@@ -78,6 +78,7 @@ import net.sf.jsqlparser.statement.update.Update;
  * @create 2017-03-22 上午9:28
  * @email xielong.wang@nvr-china.com
  */
+@Deprecated
 public class SelectSqlConverter extends AbstractSqlConverter {
     public SelectSqlConverter() {
     }

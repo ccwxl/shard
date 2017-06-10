@@ -7,6 +7,7 @@ import net.sf.jsqlparser.statement.Statement;
  * @create 2017-03-22 上午9:26
  * @email xielong.wang@nvr-china.com
  */
+@Deprecated
 public interface SqlConverter {
     String convert(Statement var1,String baseTableName,String convertTableName );
 }
