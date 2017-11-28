@@ -20,8 +20,8 @@ public class HashAlgorithmUtis {
 
     public static String hashAlgorithm(String sharedKeyValue) {
 
-        int last= sharedKeyValue.hashCode()%5;
-
+        int last= Math.abs(sharedKeyValue.hashCode())%5;
+        
         return String.valueOf(last);
     }
 }
